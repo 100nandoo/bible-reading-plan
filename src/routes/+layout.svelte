@@ -1,11 +1,10 @@
 <script>
+import Toolbar from "$lib/components/toolbar/toolbar.svelte";
 import "../app.css";
-import { Settings } from "lucide-svelte";
 </script>
 
 <header>
-  Toolbar
-  <a href="/settings"><Settings /></a>
+  <Toolbar />
 </header>
 <main>
   <div class="container mx-auto flex items-center justify-center">

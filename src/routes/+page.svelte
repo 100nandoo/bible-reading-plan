@@ -9,9 +9,11 @@ import Button from "$lib/components/ui/button/button.svelte";
 import SettingsStore from "../stores/SettingsStore";
 
 let key: string = "";
+let name: string = "";
 
 SettingsStore.subscribe((data) => {
   key = data.key;
+  name = data.name;
 });
 
 let checked = false;
@@ -30,14 +32,17 @@ onMount(() => {
     <Card.Title>{today}</Card.Title>
   </Card.Header>
   <Card.Content>
-    <Checkbox id="terms" bind:checked={checked} />
-    <Label
-      for="terms"
-      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-    ></Label>
-    <div class="space-y-1">
-      <p class="text-sm font-medium leading-none">{importedData[index].name}</p>
-      <p class="font-large text-xl">Your todays read</p>
+    <div class="flex items-center space-x-4">
+      <Checkbox id="terms" bind:checked={checked} />
+      <Label
+        for="terms"
+        class="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >{name}</Label
+      >
+    </div>
+
+    <div class="space-y-4">
+      <p class="text-sm font-medium leading-none"></p>
       <Button on:click={() => window.open(biblegatewayUrl, '_blank')}>
         Open in biblegateway
         <ArrowRight />

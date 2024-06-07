@@ -25,7 +25,7 @@ SettingsStore.subscribe((s) => console.log(JSON.parse(JSON.stringify(s))));
     <VerseCombobox></VerseCombobox>
   </SettingsLabel>
   <SettingsLabel label="Start Date:">
-    <StartDatepicker></StartDatepicker>
-    <!-- {selectedDateValue ? df.format(selectedDateValue.toDate(getLocalTimeZone())) : "Select a date"} -->
+    <!-- <StartDatepicker></StartDatepicker>
+    {selectedDateValue ? df.format(selectedDateValue.toDate(getLocalTimeZone())) : "Select a date"} -->
   </SettingsLabel>
 </div>
