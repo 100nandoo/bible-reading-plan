@@ -1,6 +1,7 @@
 <script>
 import Toolbar from "$lib/components/toolbar/toolbar.svelte";
 import "../app.css";
+export const prerender = true;
 </script>
 
 <header>
