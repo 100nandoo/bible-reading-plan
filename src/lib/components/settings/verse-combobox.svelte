@@ -13,12 +13,6 @@ import { get } from "svelte/store";
 const importedData = myData;
 
 let open = false;
-let key = "";
-$: selectedName = get(SettingsStore).name ?? "Select a verse...";
-
-SettingsStore.subscribe((data) => {
-  selectedName = data.name;
-});
 
 function closeAndFocusTrigger(triggerId: string) {
   open = false;
@@ -27,9 +21,9 @@ function closeAndFocusTrigger(triggerId: string) {
   });
 }
 
-function updateSettingsVerse({ name, key }: { name: string; key: string }) {
+function updateSettingsVerse({ name, key }: { name: string; key: string }, index: number) {
   SettingsStore.update((currentValue) => {
-    return { ...currentValue, name, key };
+    return { ...currentValue, index, name, key };
   });
 }
 </script>
@@ -43,7 +37,7 @@ function updateSettingsVerse({ name, key }: { name: string; key: string }) {
       aria-expanded={open}
       class="w-[200px] justify-between"
     >
-      {selectedName}
+      {$SettingsStore.name}
       <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
     </Button>
   </Popover.Trigger>
@@ -52,19 +46,19 @@ function updateSettingsVerse({ name, key }: { name: string; key: string }) {
       <Command.Input placeholder="Search verse..." />
       <Command.Empty>No verse found.</Command.Empty>
       <Command.Group>
-        {#each importedData as verse}
+        {#each importedData as verse, i}
           <Command.Item
             value={verse.key}
             onSelect={(currentValue) => {
-                  key = currentValue;
-                  updateSettingsVerse(verse)
+                  $SettingsStore.key = currentValue;
+                  updateSettingsVerse(verse, i)
                   closeAndFocusTrigger(ids.trigger);
                 }}
           >
             <Check
               class={cn(
                     "mr-2 h-4 w-4",
-                    key !== verse.key && "text-transparent"
+                    $SettingsStore.key !== verse.key && "text-transparent"
                   )}
             />
             {verse.name}
