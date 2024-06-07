@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@internationalized/date':
+    specifier: ^3.5.4
+    version: 3.5.4
   bits-ui:
     specifier: ^0.21.10
     version: 0.21.10(svelte@4.2.18)
@@ -17,6 +20,9 @@ dependencies:
   lucide-svelte:
     specifier: 0.372.0
     version: 0.372.0(svelte@4.2.18)
+  svelte-persisted-store:
+    specifier: ^0.11.0
+    version: 0.11.0(svelte@4.2.18)
   tailwind-merge:
     specifier: ^2.3.0
     version: 2.3.0
@@ -2396,6 +2402,15 @@ packages:
     dependencies:
       svelte: 4.2.18
     dev: true
+
+  /svelte-persisted-store@0.11.0(svelte@4.2.18):
+    resolution: {integrity: sha512-9RgJ5DrawGyyfK22A80cfu8Jose3CV8YjEZKz9Tn94rQ0tWyEmYr+XI+wrVF6wjRbW99JMDSVcFRiM3XzVJj/w==}
+    engines: {node: '>=0.14'}
+    peerDependencies:
+      svelte: ^3.48.0 || ^4.0.0 || ^5.0.0-next.0
+    dependencies:
+      svelte: 4.2.18
+    dev: false
 
   /svelte-preprocess@5.1.4(postcss@8.4.38)(svelte@4.2.18)(typescript@5.4.5):
     resolution: {integrity: sha512-IvnbQ6D6Ao3Gg6ftiM5tdbR6aAETwjhHV+UKGf5bHGYR69RQvF1ho0JKPcbUON4vy4R7zom13jPjgdOWCQ5hDA==}

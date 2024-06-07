@@ -1,19 +1,23 @@
 <script lang="ts">
-import { myData } from "./nt_data";
+import { myData } from "../lib/nt_data";
 import { Checkbox } from "$lib/components/ui/checkbox";
 import * as Card from "$lib/components/ui/card";
 import Label from "$lib/components/ui/label/label.svelte";
 import { onMount } from "svelte";
 import { ArrowRight } from "lucide-svelte";
 import Button from "$lib/components/ui/button/button.svelte";
+import SettingsStore from "../stores/SettingsStore";
 
-const importedData = myData;
+let key: string = "";
+
+SettingsStore.subscribe((data) => {
+  key = data.key;
+});
+
 let checked = false;
-let index = 10;
-
 let today: string;
 let biblegatewayUrl: string =
-  "https://www.biblegateway.com/passage/?search=" + importedData[index].key + "&version=ESV";
+  "https://www.biblegateway.com/passage/?search=" + key + "&version=ESV";
 
 onMount(() => {
   const options = { weekday: "long", day: "numeric", month: "short", year: "numeric" };
