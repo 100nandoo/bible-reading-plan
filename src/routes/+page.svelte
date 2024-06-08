@@ -8,6 +8,7 @@ import { onMount } from "svelte";
 import { ArrowRight } from "lucide-svelte";
 import Button from "$lib/components/ui/button/button.svelte";
 import SettingsStore from "../stores/SettingsStore";
+import { Confetti } from "$lib/components/home";
 
 let checked = false;
 let today: string;
@@ -24,6 +25,7 @@ const handleCheckedChange = (isChecked) => {
     let index = $SettingsStore.index + 1;
     let name = myData[index].name;
     let key = myData[index].key;
+
     setTimeout(() => {
       checked = false;
       SettingsStore.update((currentValue) => {
@@ -55,5 +57,7 @@ const handleCheckedChange = (isChecked) => {
         <ArrowRight />
       </Button>
     </div>
+
+    <Confetti isTrigger={checked} />
   </Card.Content>
 </Card.Root>

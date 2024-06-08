@@ -40,6 +40,7 @@
   "dependencies": {
     "@internationalized/date": "^3.5.4",
     "bits-ui": "^0.21.10",
+    "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
     "cmdk-sv": "^0.0.17",
     "lucide-svelte": "0.372.0",
