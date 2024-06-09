@@ -8,8 +8,6 @@ import { tick } from "svelte";
 import Button from "$lib/components/ui/button/button.svelte";
 import { myData } from "$lib/nt_data";
 import SettingsStore from "../../../stores/SettingsStore";
-import type { DateValue } from "@internationalized/date";
-import { get } from "svelte/store";
 const importedData = myData;
 
 let open = false;
