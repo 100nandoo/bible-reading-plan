@@ -4,7 +4,7 @@ import {
   type DateValue,
   DateFormatter,
   getLocalTimeZone,
-  CalendarDate
+  parseDate
 } from "@internationalized/date";
 import { cn } from "$lib/utils.js";
 import { Button } from "$lib/components/ui/button";
@@ -17,11 +17,17 @@ const df = new DateFormatter("en-SG", {
   dateStyle: "long"
 });
 
-let dateValue: CalendarDate | undefined;
-let dateFormatted = df.format(get(SettingsStore).date.toDate(getLocalTimeZone()));
+let value: DateValue;
 
-function handleDateChange(date: DateValue | undefined) {
-  SettingsStore.update((currentValue) => ({ ...currentValue, date }));
+async function getDate(): Promise<DateValue> {
+  const date = await get(SettingsStore).date;
+  return parseDate(date);
+}
+
+let promise = getDate();
+
+function handleDateChange(date: DateValue) {
+  SettingsStore.update((currentValue) => ({ ...currentValue, date: date.toString() }));
 }
 </script>
 
@@ -30,16 +36,25 @@ function handleDateChange(date: DateValue | undefined) {
     <Button
       variant="outline"
       class={cn(
-          " ustify-start text-left font-normal",
-          !dateFormatted && "text-muted-foreground"
-        )}
+        "w-auto text-left font-normal"
+      )}
       builders={[builder]}
     >
       <CalendarIcon class="mr-2 h-4 w-4" />
-      {dateFormatted ?? "Select a date"}
+      {#if value}
+        {df.format(value.toDate(getLocalTimeZone()))}
+      {:else}
+        {#await promise}
+          <p>...waiting</p>
+        {:then data}
+          {df.format(data.toDate(getLocalTimeZone()))}
+        {:catch error}
+          <p style="color: red">{error.message}</p>
+        {/await}
+      {/if}
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-auto p-0">
-    <Calendar bind:value={dateValue} onValueChange={handleDateChange} initialFocus />
+    <Calendar bind:value={value} onValueChange={handleDateChange} initialFocus />
   </Popover.Content>
 </Popover.Root>
