@@ -13,10 +13,10 @@ import DateDiffsLabel from "$lib/components/home/date-diffs-label.svelte";
 
 let checked = false;
 let todayString: string;
-let biblegatewayUrl: string =
-  "https://www.biblegateway.com/passage/?search=" + $SettingsStore.key + "&version=ESV";
-
 $: todayRead = $SettingsStore.index + 1;
+
+$: biblegatewayUrl =
+  "https://www.biblegateway.com/passage/?search=" + myData[todayRead].key + "&version=ESV";
 
 function createTodayString() {
   const options = { weekday: "long", day: "numeric", month: "short", year: "numeric" };
